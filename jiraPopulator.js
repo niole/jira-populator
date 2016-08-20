@@ -1,4 +1,5 @@
 var STORY_VIS = "story-vis";
+var SPRINT_STORY_VIS = "Story Vis";
 var CLICKED_BROWSER_ACTION = "clicked_browser_action";
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -18,12 +19,26 @@ function assignToSelf() {
 }
 
 function putInActiveStoryVisSprint() {
+  var isNumber = /([0-9]+)/g;
   var sprintDropDown = document.getElementById("customfield_10500-field");
 
   sprintDropDown.click();
 
   var sprintOptions = sprintDropDown.children;
   console.log('sprintOptions', sprintOptions);
+  var i;
+  var last = 0;
+  var lastIndex = -1;
+  for (i=0; i<sprintOptions.length; i++) {
+    var option = sprintOptions[i].innerText;
+    var sprint = parseInt(option.match(isNumber).join(""));
+    if (option.indexOf(SPRINT_STORY_VIS) > -1 && sprint > last) {
+      last = sprint;
+      lastIndex = i;
+    }
+  }
+
+  sprintDropDown.selectedIndex = lastIndex;
 }
 
 function giveMinStoryPoints() {
