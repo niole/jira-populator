@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+
+  "name": "Jira Populator",
+  "description": "This extension will populate one off jira tickets to myself",
+  "version": "1.0",
+
+  "background": {
+    "scripts": ["browser.js"]
+  },
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+
+  "permissions": [
+   "activeTab"
+   ],
+
+  "content_scripts": [
+    {
+      "matches": ["http://unlockdata.jira.com/*", "https://unlockdata.jira.com/*"],
+      "js": ["jiraPopulator.js"]
+    }
+  ]
+}
+
