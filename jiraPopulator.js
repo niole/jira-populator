@@ -19,20 +19,11 @@ function assignToSelf() {
 
 function putInActiveStoryVisSprint() {
   var sprintDropDown = document.getElementById("customfield_10500-field");
+
   sprintDropDown.click();
 
-  var allSprintOptions = document.getElementsByClassName("aui-list-item");
-
-  var activeSprintOption = Object.keys(allSprintOptions).reduce(function(acc, key) {
-    if (key.indexOf(STORY_VIS) > -1 &&
-      (acc === "" || parseInt(acc[acc.length-1]) < parseInt(key[key.length-1]))) {
-      acc = key;
-    }
-    return acc;
-  }, "");
-
-  var activeSprintElt = allSprintOptions[activeSprintOption];
-  activeSprintElt.click();
+  var sprintOptions = sprintDropDown.children;
+  console.log('sprintOptions', sprintOptions);
 }
 
 function giveMinStoryPoints() {
@@ -56,7 +47,7 @@ function setTeamStoryVis() {
 function runJiraPopulator() {
     updateDescription();
     assignToSelf();
-    //putInActiveStoryVisSprint();
+    putInActiveStoryVisSprint();
     giveMinStoryPoints();
     setTeamStoryVis();
 }
