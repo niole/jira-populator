@@ -48,7 +48,7 @@ function setTeamStoryVis() {
   for (i=0; i<children.length; i++) {
     var child = children[i];
     if (child.innerText === "Story Viz and Analysis") {
-      child.click();
+      teamDropDown.selectedIndex = i;
     }
   }
 }
